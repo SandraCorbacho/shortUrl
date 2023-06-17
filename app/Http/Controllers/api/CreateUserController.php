@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\api\v1;
+namespace App\Http\Controllers\api;
 
-use App\Hexagonal\Domain\Resources\CreateUserRequestResource;
+use App\Hexagonal\Domain\Resources\User\CreateUserRequestResource;
 use App\Http\Controllers\Controller;
 use App\src\User\Application\UseCase\CreateUserUseCase;
 use App\src\User\Request\CreateUserControllerRequest;
@@ -12,12 +12,8 @@ use Illuminate\Http\JsonResponse;
  *      path="/users",
  *      operationId="CreateUserUseCase",
  *     summary="create new user"
- *     tags=["Users"},
- *
- * @OA/RequestBody(
- *     description="Required Data",
- *     required=true,
- *     ),
+ *     tags=["Users"}
+ *     )
  */
 
 class CreateUserController extends Controller
@@ -37,7 +33,7 @@ class CreateUserController extends Controller
             return $createUserUseCase->execute($requestResource);
 
         }catch(\Throwable $e) {
-            return $e->getMessage();
+            return new JsonResponse($e->getMessage());
         }
     }
 }

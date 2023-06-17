@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\src\User\Domain\Service;
 
 use App\Hexagonal\Domain\Entity\User\User;
-use App\Hexagonal\Domain\Resources\CreateUserRequestResource;
+use App\Hexagonal\Domain\Resources\User\CreateUserRequestResource;
 use App\src\User\Infrastructure\Repository\UserRepository;
-use http\Env\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 

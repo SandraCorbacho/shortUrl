@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\api\v1\CreateUserController;
+use App\Http\Controllers\api\CreateUserController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

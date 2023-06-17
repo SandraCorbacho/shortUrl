@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace app\src\User\Application\UseCase;
 
 
-use App\Hexagonal\Domain\Entity\User\User;
-use App\Hexagonal\Domain\Resources\CreateUserRequestResource;
+use App\Hexagonal\Domain\Resources\User\CreateUserRequestResource;
 use App\src\User\Domain\Service\CreateUserService;
 use Illuminate\Http\JsonResponse;
 

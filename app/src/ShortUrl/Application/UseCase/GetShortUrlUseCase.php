@@ -6,24 +6,35 @@ namespace app\src\ShortUrl\Application\UseCase;
 
 
 use App\Hexagonal\Domain\Resources\ShortUrl\GetShortUrlRequestResource;
+use App\src\ShortUrl\Domain\Service\GetTinyUrlService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Http;
+use Throwable;
 
 class GetShortUrlUseCase
 {
+    private GetTinyUrlService $getTinyUrlService;
+
     public function __construct(
+        GetTinyUrlService $getTinyUrlService
     ) {
+        $this->getTinyUrlService = $getTinyUrlService;
     }
 
     public function execute(
-        GetShortUrlRequestResource $requestResource
-    ): JsonResponse
+        GetShortUrlRequestResource $requestResource,
+    ): String
     {
         try {
-            return new JsonResponse('tinyUrl');
+
+           $newUrl = $this->getTinyUrlService->execute($requestResource);
+
+
+            return $newUrl;
         }
-        catch (\Throwable $e)
+        catch (Throwable $e)
         {
-            return new JsonResponse($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 }

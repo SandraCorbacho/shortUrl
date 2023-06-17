@@ -23,7 +23,7 @@ class GetShortUrlController extends Controller
     public function __invoke(
         GetShortUrlControllerRequest $request,
         GetShortUrlUseCase $useCase
-    ): JsonResponse
+    ): String
     {
         try{
             $requestResource = new  GetShortUrlRequestResource(
@@ -33,7 +33,7 @@ class GetShortUrlController extends Controller
             return $useCase->execute($requestResource);
         }catch(\Throwable $e) {
 
-            return new JsonResponse($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 }

@@ -18,8 +18,9 @@ use Illuminate\Http\JsonResponse;
 
 class GetShortUrlController extends Controller
 {
-
-
+    /**
+     * @throws \Exception
+     */
     public function __invoke(
         GetShortUrlControllerRequest $request,
         GetShortUrlUseCase $useCase
@@ -32,7 +33,6 @@ class GetShortUrlController extends Controller
 
             return $useCase->execute($requestResource);
         }catch(\Throwable $e) {
-
             throw new \Exception($e->getMessage());
         }
     }

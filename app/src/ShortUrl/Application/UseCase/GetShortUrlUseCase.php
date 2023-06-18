@@ -21,16 +21,15 @@ class GetShortUrlUseCase
         $this->getTinyUrlService = $getTinyUrlService;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function execute(
         GetShortUrlRequestResource $requestResource,
     ): String
     {
         try {
-
-           $newUrl = $this->getTinyUrlService->execute($requestResource);
-
-
-            return $newUrl;
+            return $this->getTinyUrlService->execute($requestResource);
         }
         catch (Throwable $e)
         {

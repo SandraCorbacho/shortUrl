@@ -19,6 +19,9 @@ use Illuminate\Http\JsonResponse;
 class CreateUserController extends Controller
 {
 
+    /**
+     * @throws \Exception
+     */
     public function create(
         CreateUserControllerRequest $request,
         CreateUserUseCase $createUserUseCase
@@ -33,7 +36,7 @@ class CreateUserController extends Controller
             return $createUserUseCase->execute($requestResource);
 
         }catch(\Throwable $e) {
-            return new JsonResponse($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 }

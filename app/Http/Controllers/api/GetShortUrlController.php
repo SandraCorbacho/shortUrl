@@ -24,7 +24,7 @@ class GetShortUrlController extends Controller
     public function __invoke(
         GetShortUrlControllerRequest $request,
         GetShortUrlUseCase $useCase
-    ): String
+    ): JsonResponse
     {
         try{
             $requestResource = new  GetShortUrlRequestResource(

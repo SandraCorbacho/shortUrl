@@ -6,6 +6,7 @@ namespace app\src\ShortUrl\Application\UseCase;
 
 
 use App\Hexagonal\Domain\Resources\ShortUrl\GetShortUrlRequestResource;
+use App\src\ShortUrl\Domain\Converter\GetShortUrlConverter;
 use App\src\ShortUrl\Domain\Service\GetTinyUrlService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
@@ -14,11 +15,14 @@ use Throwable;
 class GetShortUrlUseCase
 {
     private GetTinyUrlService $getTinyUrlService;
+    private GetShortUrlConverter $getShortUrlConverter;
 
     public function __construct(
-        GetTinyUrlService $getTinyUrlService
+        GetTinyUrlService $getTinyUrlService,
+        GetShortUrlConverter $getShortUrlConverter
     ) {
         $this->getTinyUrlService = $getTinyUrlService;
+        $this->getShortUrlConverter = $getShortUrlConverter;
     }
 
     /**
@@ -26,10 +30,12 @@ class GetShortUrlUseCase
      */
     public function execute(
         GetShortUrlRequestResource $requestResource,
-    ): String
+    ): JsonResponse
     {
         try {
-            return $this->getTinyUrlService->execute($requestResource);
+            $newUrl = $this->getTinyUrlService->execute($requestResource);
+
+            return $this->getShortUrlConverter->converter($newUrl);
         }
         catch (Throwable $e)
         {

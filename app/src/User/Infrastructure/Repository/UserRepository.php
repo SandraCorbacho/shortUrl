@@ -6,9 +6,17 @@ use App\Hexagonal\Domain\Entity\User\User;
 
 class UserRepository
 {
+    /**
+     * @throws \Exception
+     */
     public function save(User $user): User
     {
-        $user->save();
-        return $user;
+        $userExist = $user->findUserByEmail($user->email());
+            if(!$userExist){
+                $user->save();
+                return $user;
+            }
+
+        throw new \Exception('Ya existe un Usuario con este correo');
     }
 }

@@ -16,6 +16,10 @@ class User extends Authenticatable
     protected $table = 'users';
     protected $primaryKey = 'id';
 
+    public function findUserByEmail(string $email): ?User
+    {
+        return $this->query()->where('email', $email)->first();
+    }
     public function id(): int
     {
         return $this->getAttributeValue('id');

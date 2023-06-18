@@ -17,17 +17,24 @@ class CreateUserService
     ) {
     }
 
+    /**
+     * @throws \Exception
+     */
     public function create(CreateUserRequestResource $requestResource): JsonResponse
     {
         $user = (new User())
             ->setName($requestResource->name())
             ->setEmail($requestResource->email())
             ->setPassword($requestResource->password());
+        try{
+            $this->userRepository->save($user);
 
-        $this->userRepository->save($user);
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-        Auth::login($user);
-        return Response()->json(['data' => $user, 'access_token' => $token, 'token_type' => 'Bearer']);
+            $token = $user->createToken('auth_token')->plainTextToken;
+            Auth::login($user);
+            return Response()->json(['data' => $user, 'access_token' => $token, 'token_type' => 'Bearer']);
+        }catch (\Throwable $e)
+        {
+            throw new \Exception($e->getMessage());
+        }
     }
 }

@@ -16,19 +16,19 @@ class CreateUserUseCase
     ) {
     }
 
+    /**
+     * @throws \Exception
+     */
     public function execute(
         CreateUserRequestResource $requestResource
     ): JsonResponse
     {
         try {
-            $userResponse = $this->createUserService->create($requestResource);
-
-            return $userResponse;
+            return $this->createUserService->create($requestResource);
         }
         catch (\Throwable $e)
         {
-            dd($e->getMessage());
-            return $e->getMessage();
+            throw new \Exception($e->getMessage());
         }
     }
 }

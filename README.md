@@ -22,7 +22,7 @@ API que permite acortar URLs utilizando un acortador de URLs público.
 
 ### Endpoint: POST /create/user
 
-Este endpoint crea un nuevo usuario con un bearer Token, almacenando los datos.
+Este endpoint crea un nuevo usuario con un bearer Token, almacenando los datos (crear usuario siempre sera algo opcional).
 
 **Requisitos del body de la petición:**
 
